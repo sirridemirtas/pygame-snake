@@ -27,6 +27,7 @@ class GameView:
     def play(self):
         pg.init()
         clock = pg.time.Clock()
+        clock_tick = 8
 
         running = True
         while running:
@@ -58,6 +59,8 @@ class GameView:
             self.draw_food()
             self.draw(self.game_state.snake)
 
-            clock.tick(8)
+            # Speed up the snake as the score increases
+            clock.tick(self.game_state.score + clock_tick) 
+
             pg.display.update()
         pg.quit()
