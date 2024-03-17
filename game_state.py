@@ -19,6 +19,8 @@ class GameState:
         self.food = self.create_food()
         self.score = 0
 
+        self.status = 1 # 1: playing, 0: game over
+
         self.current_direction = self.Direction.RIGHT
 
     def update_snake_positon(self, x_change, y_change):
@@ -57,10 +59,12 @@ class GameState:
             self.update_snake_positon(0, 1)
             self.current_direction = self.Direction.DOWN
 
+        if self.check_self_collision():
+            self.status = 0
+
         if self.check_food_collision():
             self.snake.insert(0, self.food)
             self.food = self.create_food()
-
         return self.snake
 
     def check_self_collision(self):
@@ -71,7 +75,7 @@ class GameState:
             or head[1] >= self.virtual_screen[1]):
             return True
 
-        for segment in self.snake[:-1]:
+        for segment in self.snake[:-1]: # check all segments except the head
             if head == segment:
                 return True
         return False

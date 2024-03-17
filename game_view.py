@@ -32,6 +32,10 @@ class GameView:
         while running:
             self.screen.fill((0, 0, 0))
 
+            if self.game_state.status == 0:
+                print("Game Over Score:", self.game_state.score)
+                self.game_state = GameState()
+
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     running = False
