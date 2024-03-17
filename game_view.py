@@ -14,7 +14,8 @@ class GameView:
             pg.draw.rect(
                 self.screen,
                 (255, 255, 255),
-                (segment[0] * TILE_SIZE, segment[1] * TILE_SIZE, TILE_SIZE, TILE_SIZE))
+                (segment[0] * TILE_SIZE,
+                 segment[1] * TILE_SIZE, TILE_SIZE, TILE_SIZE))
 
     def draw_food(self):
         food = self.game_state.food
@@ -37,19 +38,19 @@ class GameView:
 
                 if event.type == pg.KEYUP:
                     if event.key == pg.K_LEFT:
-                        self.game_state.update_snake_position(
+                        self.game_state.play(
                             self.game_state.Direction.LEFT)
                     elif event.key == pg.K_RIGHT:
-                        self.game_state.update_snake_position(
+                        self.game_state.play(
                             self.game_state.Direction.RIGHT)
                     elif event.key == pg.K_UP:
-                        self.game_state.update_snake_position(
+                        self.game_state.play(
                             self.game_state.Direction.UP)
                     elif event.key == pg.K_DOWN:
-                        self.game_state.update_snake_position(
+                        self.game_state.play(
                             self.game_state.Direction.DOWN)
 
-            self.game_state.update_snake_position()
+            self.game_state.play()
             self.draw_food()
             self.draw(self.game_state.snake)
 
